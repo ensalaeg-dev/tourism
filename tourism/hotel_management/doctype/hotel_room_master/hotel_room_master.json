@@ -1,0 +1,217 @@
+{
+ "actions": [],
+ "autoname": "format:{hotel}-{room_number}",
+ "creation": "2024-01-01 00:00:00.000000",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "hotel",
+  "room_number",
+  "room_type",
+  "column_break_3",
+  "floor",
+  "status",
+  "section_break_6",
+  "max_occupancy",
+  "price_per_night",
+  "column_break_9",
+  "extra_bed_available",
+  "extra_bed_price",
+  "section_break_12",
+  "current_folio",
+  "current_guest",
+  "column_break_15",
+  "check_in_date",
+  "expected_checkout",
+  "section_break_18",
+  "amenities",
+  "section_break_20",
+  "notes"
+ ],
+ "fields": [
+  {
+   "fieldname": "hotel",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Hotel",
+   "options": "Hotel",
+   "reqd": 1
+  },
+  {
+   "fieldname": "room_number",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Room Number",
+   "reqd": 1
+  },
+  {
+   "fieldname": "room_type",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Room Type",
+   "options": "Room Type",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_3",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "floor",
+   "fieldtype": "Data",
+   "label": "Floor"
+  },
+  {
+   "default": "Available",
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Status",
+   "options": "Available\nOccupied\nReserved\nMaintenance\nCleaning\nOut of Order"
+  },
+  {
+   "fieldname": "section_break_6",
+   "fieldtype": "Section Break",
+   "label": "Pricing"
+  },
+  {
+   "fieldname": "max_occupancy",
+   "fieldtype": "Int",
+   "label": "Max Occupancy"
+  },
+  {
+   "fieldname": "price_per_night",
+   "fieldtype": "Currency",
+   "in_list_view": 1,
+   "label": "Price Per Night"
+  },
+  {
+   "fieldname": "column_break_9",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "0",
+   "fieldname": "extra_bed_available",
+   "fieldtype": "Check",
+   "label": "Extra Bed Available"
+  },
+  {
+   "depends_on": "eval:doc.extra_bed_available",
+   "fieldname": "extra_bed_price",
+   "fieldtype": "Currency",
+   "label": "Extra Bed Price"
+  },
+  {
+   "collapsible": 1,
+   "fieldname": "section_break_12",
+   "fieldtype": "Section Break",
+   "label": "Current Occupancy"
+  },
+  {
+   "fieldname": "current_folio",
+   "fieldtype": "Link",
+   "label": "Current Folio",
+   "options": "Hotel Folio",
+   "read_only": 1
+  },
+  {
+   "fieldname": "current_guest",
+   "fieldtype": "Data",
+   "label": "Current Guest",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_15",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "check_in_date",
+   "fieldtype": "Datetime",
+   "label": "Check In Date",
+   "read_only": 1
+  },
+  {
+   "fieldname": "expected_checkout",
+   "fieldtype": "Datetime",
+   "label": "Expected Checkout",
+   "read_only": 1
+  },
+  {
+   "fieldname": "section_break_18",
+   "fieldtype": "Section Break",
+   "label": "Amenities"
+  },
+  {
+   "fieldname": "amenities",
+   "fieldtype": "Table MultiSelect",
+   "label": "Amenities",
+   "options": "Hotel Room Feature"
+  },
+  {
+   "fieldname": "section_break_20",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "notes",
+   "fieldtype": "Small Text",
+   "label": "Notes"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [
+  {
+   "group": "Operations",
+   "link_doctype": "Hotel Folio",
+   "link_fieldname": "room_master"
+  }
+ ],
+ "modified": "2024-01-01 00:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Hotel Management",
+ "name": "Hotel Room Master",
+ "naming_rule": "Expression",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Tourism Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Hotel Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Tourism User",
+   "share": 1
+  }
+ ],
+ "sort_field": "creation",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1
+}
+

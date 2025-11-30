@@ -8,18 +8,17 @@ app_license = "mit"
 # Apps
 # ------------------
 
-# required_apps = []
+required_apps = ["erpnext"]
 
 # Each item in the list will be shown as an app in the apps page
-# add_to_apps_screen = [
-# 	{
-# 		"name": "tourism",
-# 		"logo": "/assets/tourism/logo.png",
-# 		"title": "Tourism",
-# 		"route": "/tourism",
-# 		"has_permission": "tourism.api.permission.has_app_permission"
-# 	}
-# ]
+add_to_apps_screen = [
+	{
+		"name": "tourism",
+		"logo": "/assets/tourism/images/tourism-logo.png",
+		"title": "Tourism",
+		"route": "/app/tours-and-travels",
+	}
+]
 
 # Includes in <head>
 # ------------------
@@ -43,7 +42,16 @@ app_license = "mit"
 # page_js = {"page" : "public/js/file.js"}
 
 # include js in doctype views
-# doctype_js = {"doctype" : "public/js/doctype.js"}
+doctype_js = {
+	"Tour Package": "tours_and_travels/doctype/tour_package/tour_package.js",
+	"Tour Registration": "tours_and_travels/doctype/tour_registration/tour_registration.js",
+	"Hotel": "hotel_management/doctype/hotel/hotel.js",
+	"Hotel Folio": "hotel_management/doctype/hotel_folio/hotel_folio.js",
+	"Hotel Reservation": "hotel_management/doctype/hotel_reservation/hotel_reservation.js",
+	"Hotel Room Master": "hotel_management/doctype/hotel_room_master/hotel_room_master.js",
+	"Room Type": "hotel_management/doctype/room_type/room_type.js",
+}
+
 # doctype_list_js = {"doctype" : "public/js/doctype_list.js"}
 # doctype_tree_js = {"doctype" : "public/js/doctype_tree.js"}
 # doctype_calendar_js = {"doctype" : "public/js/doctype_calendar.js"}
@@ -83,7 +91,7 @@ app_license = "mit"
 # ------------
 
 # before_install = "tourism.install.before_install"
-# after_install = "tourism.install.after_install"
+after_install = "tourism.setup.install.after_install"
 
 # Uninstallation
 # ------------
@@ -111,7 +119,7 @@ app_license = "mit"
 # ------------------
 # See frappe.core.notifications.get_notification_config
 
-# notification_config = "tourism.notifications.get_notification_config"
+notification_config = "tourism.notifications.get_notification_config"
 
 # Permissions
 # -----------
@@ -137,13 +145,11 @@ app_license = "mit"
 # ---------------
 # Hook on document methods and events
 
-# doc_events = {
-# 	"*": {
-# 		"on_update": "method",
-# 		"on_cancel": "method",
-# 		"on_trash": "method"
-# 	}
-# }
+doc_events = {
+	"Tour Registration": {
+		"after_insert": "tourism.tours_and_travels.doctype.tour_registration.tour_registration.create_crm_opportunity",
+	}
+}
 
 # Scheduled Tasks
 # ---------------
@@ -242,3 +248,15 @@ app_license = "mit"
 # 	"Logging DocType Name": 30  # days to retain logs
 # }
 
+# Fixtures
+# --------
+fixtures = [
+	{
+		"doctype": "Custom Field",
+		"filters": [["module", "in", ["Tourism", "Tours And Travels", "Hotel Management", "Restaurant Management", "Transportation Management", "Travel Services"]]]
+	},
+	{
+		"doctype": "Property Setter",
+		"filters": [["module", "in", ["Tourism", "Tours And Travels", "Hotel Management", "Restaurant Management", "Transportation Management", "Travel Services"]]]
+	},
+]

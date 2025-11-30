@@ -1,0 +1,415 @@
+{
+ "actions": [],
+ "autoname": "naming_series:",
+ "creation": "2024-01-01 00:00:00.000000",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "naming_series",
+  "registration_type",
+  "tour_package",
+  "package_name",
+  "column_break_4",
+  "status",
+  "booking_date",
+  "section_break_7",
+  "customer",
+  "customer_name",
+  "column_break_10",
+  "contact_person",
+  "contact_email",
+  "contact_phone",
+  "section_break_14",
+  "arrival_date",
+  "departure_date",
+  "column_break_17",
+  "number_of_adults",
+  "number_of_children",
+  "total_pax",
+  "section_break_21",
+  "region",
+  "package_category",
+  "section_break_24",
+  "hotels",
+  "section_break_26",
+  "restaurants",
+  "section_break_28",
+  "transportations",
+  "section_break_30",
+  "guides",
+  "section_break_32",
+  "attractions",
+  "section_break_34",
+  "total_hotel_cost",
+  "total_restaurant_cost",
+  "total_transportation_cost",
+  "column_break_38",
+  "total_guide_cost",
+  "total_attraction_cost",
+  "total_cost",
+  "column_break_42",
+  "discount_amount",
+  "grand_total",
+  "section_break_45",
+  "crm_lead",
+  "crm_opportunity",
+  "section_break_48",
+  "special_requests",
+  "section_break_50",
+  "amended_from"
+ ],
+ "fields": [
+  {
+   "fieldname": "naming_series",
+   "fieldtype": "Select",
+   "label": "Series",
+   "options": "TOUR-REG-.YYYY.-",
+   "reqd": 1
+  },
+  {
+   "default": "With Package",
+   "fieldname": "registration_type",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Registration Type",
+   "options": "With Package\nWithout Package",
+   "reqd": 1
+  },
+  {
+   "depends_on": "eval:doc.registration_type=='With Package'",
+   "fieldname": "tour_package",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Tour Package",
+   "options": "Tour Package"
+  },
+  {
+   "fetch_from": "tour_package.package_name",
+   "fieldname": "package_name",
+   "fieldtype": "Data",
+   "label": "Package Name",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_4",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "Draft",
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Status",
+   "options": "Draft\nPending\nConfirmed\nIn Progress\nCompleted\nCancelled"
+  },
+  {
+   "default": "Today",
+   "fieldname": "booking_date",
+   "fieldtype": "Date",
+   "in_list_view": 1,
+   "label": "Booking Date",
+   "reqd": 1
+  },
+  {
+   "fieldname": "section_break_7",
+   "fieldtype": "Section Break",
+   "label": "Customer Information"
+  },
+  {
+   "fieldname": "customer",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Customer",
+   "options": "Customer",
+   "reqd": 1
+  },
+  {
+   "fetch_from": "customer.customer_name",
+   "fieldname": "customer_name",
+   "fieldtype": "Data",
+   "label": "Customer Name",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_10",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "contact_person",
+   "fieldtype": "Data",
+   "label": "Contact Person"
+  },
+  {
+   "fieldname": "contact_email",
+   "fieldtype": "Data",
+   "label": "Contact Email",
+   "options": "Email"
+  },
+  {
+   "fieldname": "contact_phone",
+   "fieldtype": "Data",
+   "label": "Contact Phone",
+   "options": "Phone"
+  },
+  {
+   "fieldname": "section_break_14",
+   "fieldtype": "Section Break",
+   "label": "Tour Details"
+  },
+  {
+   "fieldname": "arrival_date",
+   "fieldtype": "Date",
+   "in_list_view": 1,
+   "label": "Arrival Date",
+   "reqd": 1
+  },
+  {
+   "fieldname": "departure_date",
+   "fieldtype": "Date",
+   "label": "Departure Date",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_17",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "1",
+   "fieldname": "number_of_adults",
+   "fieldtype": "Int",
+   "label": "Number of Adults"
+  },
+  {
+   "default": "0",
+   "fieldname": "number_of_children",
+   "fieldtype": "Int",
+   "label": "Number of Children"
+  },
+  {
+   "fieldname": "total_pax",
+   "fieldtype": "Int",
+   "label": "Total Pax",
+   "read_only": 1
+  },
+  {
+   "fieldname": "section_break_21",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "region",
+   "fieldtype": "Link",
+   "label": "Region",
+   "options": "Region"
+  },
+  {
+   "fieldname": "package_category",
+   "fieldtype": "Link",
+   "label": "Package Category",
+   "options": "Package Category"
+  },
+  {
+   "fieldname": "section_break_24",
+   "fieldtype": "Section Break",
+   "label": "Hotels"
+  },
+  {
+   "fieldname": "hotels",
+   "fieldtype": "Table",
+   "label": "Hotels",
+   "options": "Tour Registration Hotel"
+  },
+  {
+   "fieldname": "section_break_26",
+   "fieldtype": "Section Break",
+   "label": "Restaurants"
+  },
+  {
+   "fieldname": "restaurants",
+   "fieldtype": "Table",
+   "label": "Restaurants",
+   "options": "Tour Registration Restaurant"
+  },
+  {
+   "fieldname": "section_break_28",
+   "fieldtype": "Section Break",
+   "label": "Transportation"
+  },
+  {
+   "fieldname": "transportations",
+   "fieldtype": "Table",
+   "label": "Transportation",
+   "options": "Tour Registration Transportation"
+  },
+  {
+   "fieldname": "section_break_30",
+   "fieldtype": "Section Break",
+   "label": "Guides"
+  },
+  {
+   "fieldname": "guides",
+   "fieldtype": "Table",
+   "label": "Guides",
+   "options": "Tour Registration Guide"
+  },
+  {
+   "fieldname": "section_break_32",
+   "fieldtype": "Section Break",
+   "label": "Attractions"
+  },
+  {
+   "fieldname": "attractions",
+   "fieldtype": "Table",
+   "label": "Attractions",
+   "options": "Tour Registration Attraction"
+  },
+  {
+   "fieldname": "section_break_34",
+   "fieldtype": "Section Break",
+   "label": "Pricing Summary"
+  },
+  {
+   "fieldname": "total_hotel_cost",
+   "fieldtype": "Currency",
+   "label": "Total Hotel Cost",
+   "read_only": 1
+  },
+  {
+   "fieldname": "total_restaurant_cost",
+   "fieldtype": "Currency",
+   "label": "Total Restaurant Cost",
+   "read_only": 1
+  },
+  {
+   "fieldname": "total_transportation_cost",
+   "fieldtype": "Currency",
+   "label": "Total Transportation Cost",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_38",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "total_guide_cost",
+   "fieldtype": "Currency",
+   "label": "Total Guide Cost",
+   "read_only": 1
+  },
+  {
+   "fieldname": "total_attraction_cost",
+   "fieldtype": "Currency",
+   "label": "Total Attraction Cost",
+   "read_only": 1
+  },
+  {
+   "fieldname": "total_cost",
+   "fieldtype": "Currency",
+   "label": "Total Cost",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_42",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "0",
+   "fieldname": "discount_amount",
+   "fieldtype": "Currency",
+   "label": "Discount Amount"
+  },
+  {
+   "fieldname": "grand_total",
+   "fieldtype": "Currency",
+   "label": "Grand Total",
+   "read_only": 1
+  },
+  {
+   "fieldname": "section_break_45",
+   "fieldtype": "Section Break",
+   "label": "CRM Integration"
+  },
+  {
+   "fieldname": "crm_lead",
+   "fieldtype": "Link",
+   "label": "CRM Lead",
+   "options": "Lead",
+   "read_only": 1
+  },
+  {
+   "fieldname": "crm_opportunity",
+   "fieldtype": "Link",
+   "label": "CRM Opportunity",
+   "options": "Opportunity",
+   "read_only": 1
+  },
+  {
+   "fieldname": "section_break_48",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "special_requests",
+   "fieldtype": "Text Editor",
+   "label": "Special Requests"
+  },
+  {
+   "fieldname": "section_break_50",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Tour Registration",
+   "print_hide": 1,
+   "read_only": 1
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "is_submittable": 1,
+ "links": [
+  {
+   "group": "Hotel",
+   "link_doctype": "Hotel Folio",
+   "link_fieldname": "tour_registration"
+  }
+ ],
+ "modified": "2024-01-01 00:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Tours And Travels",
+ "name": "Tour Registration",
+ "naming_rule": "By \"Naming Series\" field",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Tourism Manager",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Tourism User",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "creation",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1
+}
+

@@ -1,0 +1,240 @@
+{
+ "actions": [],
+ "autoname": "naming_series:",
+ "creation": "2024-01-01 00:00:00.000000",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "naming_series",
+  "contract_name",
+  "contract_type",
+  "column_break_3",
+  "status",
+  "region",
+  "section_break_6",
+  "supplier",
+  "supplier_name",
+  "column_break_9",
+  "contact_person",
+  "contact_email",
+  "section_break_12",
+  "start_date",
+  "end_date",
+  "column_break_15",
+  "season",
+  "section_break_17",
+  "hotel_items",
+  "section_break_19",
+  "restaurant_items",
+  "section_break_21",
+  "transportation_items",
+  "section_break_23",
+  "terms_and_conditions",
+  "section_break_25",
+  "amended_from"
+ ],
+ "fields": [
+  {
+   "fieldname": "naming_series",
+   "fieldtype": "Select",
+   "label": "Series",
+   "options": "TOUR-CON-.YYYY.-",
+   "reqd": 1
+  },
+  {
+   "fieldname": "contract_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Contract Name",
+   "reqd": 1
+  },
+  {
+   "fieldname": "contract_type",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Contract Type",
+   "options": "\nHotel\nRestaurant\nTransportation\nCombined",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_3",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "Draft",
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Status",
+   "options": "Draft\nActive\nExpired\nCancelled"
+  },
+  {
+   "fieldname": "region",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Region",
+   "options": "Region"
+  },
+  {
+   "fieldname": "section_break_6",
+   "fieldtype": "Section Break",
+   "label": "Supplier Details"
+  },
+  {
+   "fieldname": "supplier",
+   "fieldtype": "Link",
+   "label": "Supplier",
+   "options": "Supplier"
+  },
+  {
+   "fetch_from": "supplier.supplier_name",
+   "fieldname": "supplier_name",
+   "fieldtype": "Data",
+   "label": "Supplier Name",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_9",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "contact_person",
+   "fieldtype": "Data",
+   "label": "Contact Person"
+  },
+  {
+   "fieldname": "contact_email",
+   "fieldtype": "Data",
+   "label": "Contact Email",
+   "options": "Email"
+  },
+  {
+   "fieldname": "section_break_12",
+   "fieldtype": "Section Break",
+   "label": "Contract Period"
+  },
+  {
+   "fieldname": "start_date",
+   "fieldtype": "Date",
+   "in_list_view": 1,
+   "label": "Start Date",
+   "reqd": 1
+  },
+  {
+   "fieldname": "end_date",
+   "fieldtype": "Date",
+   "in_list_view": 1,
+   "label": "End Date",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_15",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "season",
+   "fieldtype": "Link",
+   "label": "Season",
+   "options": "Travelling Season"
+  },
+  {
+   "depends_on": "eval:doc.contract_type=='Hotel' || doc.contract_type=='Combined'",
+   "fieldname": "section_break_17",
+   "fieldtype": "Section Break",
+   "label": "Hotel Contract Items"
+  },
+  {
+   "fieldname": "hotel_items",
+   "fieldtype": "Table",
+   "label": "Hotel Items",
+   "options": "Contract Hotel Item"
+  },
+  {
+   "depends_on": "eval:doc.contract_type=='Restaurant' || doc.contract_type=='Combined'",
+   "fieldname": "section_break_19",
+   "fieldtype": "Section Break",
+   "label": "Restaurant Contract Items"
+  },
+  {
+   "fieldname": "restaurant_items",
+   "fieldtype": "Table",
+   "label": "Restaurant Items",
+   "options": "Contract Restaurant Item"
+  },
+  {
+   "depends_on": "eval:doc.contract_type=='Transportation' || doc.contract_type=='Combined'",
+   "fieldname": "section_break_21",
+   "fieldtype": "Section Break",
+   "label": "Transportation Contract Items"
+  },
+  {
+   "fieldname": "transportation_items",
+   "fieldtype": "Table",
+   "label": "Transportation Items",
+   "options": "Contract Transportation Item"
+  },
+  {
+   "fieldname": "section_break_23",
+   "fieldtype": "Section Break",
+   "label": "Terms and Conditions"
+  },
+  {
+   "fieldname": "terms_and_conditions",
+   "fieldtype": "Text Editor",
+   "label": "Terms and Conditions"
+  },
+  {
+   "fieldname": "section_break_25",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Tourism Contract",
+   "print_hide": 1,
+   "read_only": 1
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "is_submittable": 1,
+ "links": [],
+ "modified": "2024-01-01 00:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Tours And Travels",
+ "name": "Tourism Contract",
+ "naming_rule": "By \"Naming Series\" field",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Tourism Manager",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Tourism User",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "creation",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1
+}
+

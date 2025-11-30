@@ -1,1 +1,6 @@
 Tourism
+Tours And Travels
+Hotel Management
+Restaurant Management
+Transportation Management
+Travel Services
