@@ -12,6 +12,12 @@
   "column_break_2",
   "enabled",
   "status",
+  "is_group",
+  "tree_section",
+  "parent_hotel",
+  "lft",
+  "rgt",
+  "old_parent",
   "section_break_5",
   "region",
   "address",
@@ -72,6 +78,54 @@
    "in_list_view": 1,
    "label": "Status",
    "options": "Active\nInactive\nUnder Renovation"
+  },
+  {
+   "default": "0",
+   "fieldname": "is_group",
+   "fieldtype": "Check",
+   "label": "Is Group",
+   "bold": 1,
+   "description": "Check if this hotel is a parent/group that can contain child hotels"
+  },
+  {
+   "fieldname": "tree_section",
+   "fieldtype": "Section Break",
+   "label": "Parent Hotel",
+   "collapsible": 1
+  },
+  {
+   "fieldname": "parent_hotel",
+   "fieldtype": "Link",
+   "label": "Parent Hotel",
+   "options": "Hotel",
+   "ignore_user_permissions": 1,
+   "description": "Select parent hotel if this is a child/branch hotel"
+  },
+  {
+   "fieldname": "lft",
+   "fieldtype": "Int",
+   "hidden": 1,
+   "label": "Left",
+   "no_copy": 1,
+   "read_only": 1,
+   "search_index": 1
+  },
+  {
+   "fieldname": "rgt",
+   "fieldtype": "Int",
+   "hidden": 1,
+   "label": "Right",
+   "no_copy": 1,
+   "read_only": 1,
+   "search_index": 1
+  },
+  {
+   "fieldname": "old_parent",
+   "fieldtype": "Data",
+   "hidden": 1,
+   "label": "Old Parent",
+   "no_copy": 1,
+   "read_only": 1
   },
   {
    "fieldname": "section_break_5",
@@ -185,6 +239,8 @@
   }
  ],
  "index_web_pages_for_search": 1,
+ "is_tree": 1,
+ "nsm_parent_field": "parent_hotel",
  "links": [
   {
    "group": "Operations",

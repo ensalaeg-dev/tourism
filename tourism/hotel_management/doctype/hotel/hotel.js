@@ -3,6 +3,21 @@
 
 frappe.ui.form.on('Hotel', {
 	refresh: function(frm) {
+		// Add tree view button
+		frm.add_custom_button(__('View Tree'), function() {
+			frappe.set_route('Tree', 'Hotel');
+		}, __('View'));
+
+		// Filter parent_hotel to only show groups
+		frm.set_query('parent_hotel', function() {
+			return {
+				filters: {
+					'is_group': 1,
+					'name': ['!=', frm.doc.name]
+				}
+			};
+		});
+
 		if (!frm.is_new()) {
 			// Add Room button
 			frm.add_custom_button(__('Add Room'), function() {
@@ -10,6 +25,15 @@ frappe.ui.form.on('Hotel', {
 					hotel: frm.doc.name
 				});
 			}, __('Actions'));
+
+			// View Child Hotels button (only for groups)
+			if (frm.doc.is_group) {
+				frm.add_custom_button(__('View Child Hotels'), function() {
+					frappe.set_route('List', 'Hotel', {
+						parent_hotel: frm.doc.name
+					});
+				}, __('View'));
+			}
 			
 			// View Rooms button
 			frm.add_custom_button(__('View Rooms'), function() {
@@ -113,6 +137,27 @@ frappe.ui.form.on('Hotel', {
 				}
 			});
 		}
+	},
+
+	is_group: function(frm) {
+		// If un-checking is_group, check if there are child hotels
+		if (!frm.doc.is_group && !frm.is_new()) {
+			frappe.call({
+				method: 'frappe.client.get_count',
+				args: {
+					doctype: 'Hotel',
+					filters: {
+						parent_hotel: frm.doc.name
+					}
+				},
+				callback: function(r) {
+					if (r.message && r.message > 0) {
+						frappe.msgprint(__('Cannot uncheck Is Group as this hotel has {0} child hotel(s)', [r.message]));
+						frm.set_value('is_group', 1);
+					}
+				}
+			});
+		}
 	}
 });
 
@@ -130,3 +175,38 @@ frappe.ui.form.on('Hotel Room', {
 	}
 });
 
+// Tree view settings
+frappe.treeview_settings['Hotel'] = {
+	breadcrumb: 'Hotel Management',
+	title: __('Hotels'),
+	get_tree_root: false,
+	filters: [
+		{
+			fieldname: 'region',
+			fieldtype: 'Link',
+			options: 'Region',
+			label: __('Region')
+		}
+	],
+	get_tree_nodes: 'frappe.desk.treeview.get_children',
+	add_tree_node: 'frappe.desk.treeview.add_node',
+	menu_items: [
+		{
+			label: __('New Hotel'),
+			action: function() {
+				frappe.new_doc('Hotel');
+			},
+			condition: 'frappe.boot.user.can_create.indexOf("Hotel") !== -1'
+		}
+	],
+	onload: function(treeview) {
+		treeview.make_tree();
+	},
+	onrender: function(node) {
+		if (node.data && node.data.star_rating) {
+			$('<span class="text-muted small ml-2">' + node.data.star_rating + '</span>')
+				.appendTo(node.$tree_link);
+		}
+	},
+	extend_toolbar: true
+};
